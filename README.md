@@ -1,4 +1,4 @@
-Mobile React Native weather application [WIP]
+React Native weather application [WIP]
 ===============
 This project was my first project on React Native. I did this to learn more about mobile development and to learen React Native. The project is still under work. </br> Picture of the welcome page:
 
