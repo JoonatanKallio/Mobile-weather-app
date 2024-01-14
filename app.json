@@ -23,11 +23,13 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "scheme": "weather-application",
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-localization"
+      "expo-localization",
+      "expo-router"
     ]
   }
 }

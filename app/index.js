@@ -1,14 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import Constants from 'expo-constants';
-import Weather from "./src/components/Weather";
+import Weather from "../src/components/Weather";
 
 export default function App() {
     return (
         <View style={styles.container}>
             <View style={{justifyContent: "center", alignItems: "center"}}>
                 <View style={styles.header}>
-                    <Image source={require("./assets/weather-forecast.png")} style={{ width: 120, height: 120 }} />
+                    <Image source={require("../assets/weather-forecast.png")} style={{ width: 120, height: 120 }} />
                     <Text style={styles.headerText}>WeatherNow</Text>
                 </View>
                 <Weather />
