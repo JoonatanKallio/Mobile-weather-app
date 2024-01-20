@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "weather_app",
-    "slug": "weather_app",
+    "slug": "weather-application",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.joonatan_k.weatherapplication"
     },
     "scheme": "weather-application",
     "web": {
@@ -29,7 +30,20 @@
     },
     "plugins": [
       "expo-localization",
-      "expo-router"
-    ]
+      "expo-router",
+      ["expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow WeatherNow to use your location."
+        }]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "55e02988-679d-4191-ace3-cfc7fb5a62bf"
+      }
+    },
+    "owner": "joonatan_k"
   }
 }

@@ -3,14 +3,14 @@ import {useEffect, useState} from "react";
 import moment from 'moment-timezone';
 import * as Localization from "expo-localization";
 
-export default function Weather () {
+export default function Weather ({ location }) {
     const [weatherData, setWeatherData] = useState()
     const apiKey = process.env.EXPO_PUBLIC_WEATHER_API_KEY
 
+    //Fetches current weather and sunrise/sunset from the user's location
     function fetchData() {
-        fetch("https://api.openweathermap.org/data/2.5/weather?appid=" + apiKey + "&units=metric&q=Lappeenranta")
+        fetch("https://api.openweathermap.org/data/2.5/weather?appid=" + apiKey + "&units=metric&lat="+location.coords.latitude+"&lon="+location.coords.longitude)
             .then(response => response.json())
-
             .then(json => {
                 setWeatherData(json)
             })
@@ -22,9 +22,9 @@ export default function Weather () {
         fetchData();
     }, []);
 
-    //Checks if the weather data has been loaded
+    //Renders weather if the weather data has been fetched
     if (weatherData) {
-        //Formats the time to local timezone
+        //Formats the time to the user's local timezone
         const weatherIcon = "https://openweathermap.org/img/wn/" + weatherData.weather[0].icon + "@2x.png";
         const sunrise = new Date(weatherData.sys.sunrise * 1000)
         const formattedSunrise = moment(sunrise).tz(Localization.getCalendars()[0].timeZone).format("HH:mm")
@@ -53,14 +53,14 @@ export default function Weather () {
                         <View style={styles.dayTime}>
                             <View
                                 style={{flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 20}}>
-                                <Image source={require("../../assets/sunrise.png")} style={{width: 100, height: 100}}/>
+                                <Image source={require("../../assets/sunrise.png")} style={{width: 70, height: 70}}/>
                                 <Text style={{fontWeight: "900", fontSize: 30}}>{formattedSunrise}</Text>
                             </View>
                         </View>
                         <View style={styles.dayTime}>
                             <View
                                 style={{flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 20}}>
-                                <Image source={require("../../assets/sunset.png")} style={{width: 100, height: 100}}/>
+                                <Image source={require("../../assets/sunset.png")} style={{width: 70, height: 70}}/>
                                 <Text style={{fontWeight: "900", fontSize: 30}}>{formattedSunset}</Text>
                             </View>
                         </View>
@@ -69,6 +69,12 @@ export default function Weather () {
             </View>
         )
     }
+    //Renders loading view
+    return (
+        <View>
+            <Text style={{fontWeight: "900", fontSize: 30}}>Loading data...</Text>
+        </View>
+    )
 }
 const styles = StyleSheet.create({
     wrapper: {
